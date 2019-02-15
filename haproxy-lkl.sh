@@ -186,10 +186,10 @@ generate_config() {
 	defaults
 	    mode tcp
 	    timeout connect 5s
-	    timeout client 30s
-	    timeout server 30s
+	    timeout client 10s
+	    timeout server 10s
 	backend local
-	    server srv 10.0.0.1
+	    server srv 10.0.0.1 maxconn 20480
 	EOF
 
 	local legal_rules=
