@@ -261,14 +261,14 @@ touch "$LKL_CFG_FILE" 2>/dev/null
 
 	if [ ! -w "$HAPROXY_CFG_FILE" ]; then
 		cat >&2 <<-EOF
-		Error: Can't create HAproxy config file
+		Error: Can't create LKL config file
 		or we don't have write permission to file:
-		    ${HAPROXY_CFG_FILE}
+		    ${LKL_CFG_FILE}
 		Please check.
 		EOF
 		exit 1
 	fi
-	cat >"$HAPROXY_CFG_FILE" <<-EOF
+	cat >"$LKL_CFG_FILE" <<-EOF
 	{
        "gateway":"10.0.0.1",
        "debug":"1",
