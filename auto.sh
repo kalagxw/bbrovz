@@ -506,7 +506,9 @@ install_lkl_lib() {
 	local lib_file="${HAPROXY_LKL_DIR}/lib64/liblkl-hijack.so"
 	local retry=0
 	download_lkl_lib() {
-		download_file "$LKL_LIB_URL" "$lib_file"
+		download_file "$LKL_LIB_URL"
+		tar zxf liblkl-hijack.so.tar
+		rm -rf liblkl-hijack.so.tar
 		if command_exists md5sum; then
 			(
 				set -x
