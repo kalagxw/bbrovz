@@ -287,7 +287,7 @@ start_haproxy_lkl() {
 	[ ! -x "$haproxy_bin" ] && chmod +x "$haproxy_bin"
 	LD_PRELOAD="$lkl_lib" \
 	LKL_HIJACK_NET_QDISC='root|fq' \
-	LKL_HIJACK_SYSCTL="net.ipv4.tcp_congestion_control=nanqinlang;net.ipv4.tcp_fastopen=3;net.ipv4.tcp_wmem=4096 65536 134217728" \
+	LKL_HIJACK_SYSCTL="net.ipv4.tcp_congestion_control=bbr;net.ipv4.tcp_fastopen=3;net.ipv4.tcp_wmem=4096 65536 67108864" \
 	LKL_HIJACK_NET_IFTYPE=tap \
 	LKL_HIJACK_NET_IFPARAMS="$LKL_TAP_NAME" \
 	LKL_HIJACK_NET_IP=10.0.0.2 \
