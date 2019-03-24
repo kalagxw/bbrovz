@@ -13,12 +13,13 @@ See the License for the specific language governing permissions and
 limitations under the License.
 EOF
 
-INTERFACE='venet0'
+INTERFACE='eth0'
 HAPROXY_LKL_DIR='/usr/local/haproxy-lkl'
 LKL_TAP_NAME='lkl'
 LKL_IN_CHAIN_NAME='LKL_IN'
 
 HAPROXY_CFG_FILE="${HAPROXY_LKL_DIR}/etc/haproxy.cfg"
+LKL_CFG_FILE="${HAPROXY_LKL_DIR}/lib64/lkl-hijack.json"
 PIDFILE=
 LOGFILE='/dev/null'
 
@@ -189,9 +190,10 @@ generate_config() {
 	backend local
 	    server srv 10.0.0.1 maxconn 20480
 	EOF
-
+     
 	local legal_rules=
 	local i=0
+	
 
 	add_rule() {
 		local ports="$1"
@@ -255,6 +257,39 @@ generate_config() {
 	fi
 }
 
+touch "$LKL_CFG_FILE" 2>/dev/null
+
+	if [ ! -w "$HAPROXY_CFG_FILE" ]; then
+		cat >&2 <<-EOF
+		Error: Can't create HAproxy config file
+		or we don't have write permission to file:
+		    ${HAPROXY_CFG_FILE}
+		Please check.
+		EOF
+		exit 1
+	fi
+	cat >"$HAPROXY_CFG_FILE" <<-EOF
+	{
+       "gateway":"10.0.0.1",
+       "debug":"1",
+       "singlecpu":"1",
+       "sysctl":"net.ipv4.tcp_wmem=4096 65536 67108864",
+       "sysctl":"net.ipv4.tcp_congestion_control=bbr",
+       "sysctl":"net.ipv4.tcp_fastopen=3",
+       "interfaces":[
+               {
+                       "type":"tap",
+                       "param":"lkl",
+                       "ip":"10.0.0.2",
+                       "masklen":"24",
+                       "ifgateway":"10.0.0.1",
+                       "offload":"0x8883",
+                       "qdisc":"root|fq"
+               }
+       ]
+}
+     EOF
+
 start_haproxy_lkl() {
 	local haproxy_bin="${HAPROXY_LKL_DIR}/sbin/haproxy"
 	local lkl_lib="${HAPROXY_LKL_DIR}/lib64/liblkl-hijack.so"
@@ -286,14 +321,6 @@ start_haproxy_lkl() {
 
 	[ ! -x "$haproxy_bin" ] && chmod +x "$haproxy_bin"
 	LD_PRELOAD="$lkl_lib" \
-	LKL_HIJACK_NET_QDISC='root|fq' \
-	LKL_HIJACK_SYSCTL="net.ipv4.tcp_congestion_control=bbr;net.ipv4.tcp_fastopen=3;net.ipv4.tcp_wmem=4096 65536 67108864" \
-	LKL_HIJACK_NET_IFTYPE=tap \
-	LKL_HIJACK_NET_IFPARAMS="$LKL_TAP_NAME" \
-	LKL_HIJACK_NET_IP=10.0.0.2 \
-	LKL_HIJACK_NET_NETMASK_LEN=24 \
-	LKL_HIJACK_NET_GATEWAY=10.0.0.1 \
-	LKL_HIJACK_OFFLOAD=0x8883 \
 	$haproxy_bin -f "$HAPROXY_CFG_FILE" >"$LOGFILE" 2>&1 &
 }
 
