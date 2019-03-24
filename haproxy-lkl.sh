@@ -19,7 +19,6 @@ LKL_TAP_NAME='lkl'
 LKL_IN_CHAIN_NAME='LKL_IN'
 
 HAPROXY_CFG_FILE="${HAPROXY_LKL_DIR}/etc/haproxy.cfg"
-LKL_CFG_FILE="${HAPROXY_LKL_DIR}/lib64/lkl-hijack.json"
 PIDFILE=
 LOGFILE='/dev/null'
 
@@ -255,6 +254,8 @@ generate_config() {
 		EOF
 	fi
 
+local LKL_CFG_FILE="${HAPROXY_LKL_DIR}/lib64/lkl-hijack.json"
+
 touch "$LKL_CFG_FILE" 2>/dev/null
 
 	if [ ! -w "$HAPROXY_CFG_FILE" ]; then
@@ -284,8 +285,8 @@ touch "$LKL_CFG_FILE" 2>/dev/null
                        "offload":"0x8883",
                        "qdisc":"root|fq"
                }
-       ]
-}
+                    ]
+         }
      EOF
 }
 
