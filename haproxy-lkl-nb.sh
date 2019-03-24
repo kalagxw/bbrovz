@@ -13,7 +13,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 EOF
 
-INTERFACE='venet0'
+INTERFACE='eth0'
 HAPROXY_LKL_DIR='/usr/local/haproxy-lkl'
 LKL_TAP_NAME='lkl'
 LKL_IN_CHAIN_NAME='LKL_IN'
