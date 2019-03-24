@@ -279,7 +279,7 @@ touch "$LKL_CFG_FILE" 2>/dev/null
        "interfaces":[
                {
                        "type":"tap",
-                       "param":"lkl",
+                       "param":"$LKL_TAP_NAME",
                        "ip":"10.0.0.2",
                        "masklen":"24",
                        "ifgateway":"10.0.0.1",
