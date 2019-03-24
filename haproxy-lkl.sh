@@ -254,7 +254,6 @@ generate_config() {
 		${legal_rules}
 		EOF
 	fi
-}
 
 touch "$LKL_CFG_FILE" 2>/dev/null
 
@@ -288,6 +287,7 @@ touch "$LKL_CFG_FILE" 2>/dev/null
        ]
 }
      EOF
+}
 
 start_haproxy_lkl() {
 	local haproxy_bin="${HAPROXY_LKL_DIR}/sbin/haproxy"
