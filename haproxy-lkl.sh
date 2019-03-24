@@ -267,7 +267,8 @@ touch "$LKL_CFG_FILE" 2>/dev/null
 		EOF
 		exit 1
 	fi
-	cat >"$LKL_CFG_FILE" <<-EOF
+	(
+cat <<'EOF'
 	{
        "gateway":"10.0.0.1",
        "debug":"1",
@@ -286,8 +287,11 @@ touch "$LKL_CFG_FILE" 2>/dev/null
                        "qdisc":"root|fq"
                }
                     ]
-         }
-     EOF
+     }
+EOF
+
+) > "$LKL_CFG_FILE"
+
 }
 
 start_haproxy_lkl() {
