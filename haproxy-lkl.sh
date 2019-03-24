@@ -190,10 +190,9 @@ generate_config() {
 	backend local
 	    server srv 10.0.0.1 maxconn 20480
 	EOF
-     
+
 	local legal_rules=
 	local i=0
-	
 
 	add_rule() {
 		local ports="$1"
@@ -219,7 +218,7 @@ generate_config() {
 		[ "$port" -ge "1" -a "$port" -le "65535" ]
 		return $?
 	}
-
+	
 	local start_port=
 	local end_port=
 	for line in $port_rule_lines; do
