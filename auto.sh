@@ -22,7 +22,7 @@ HAPROXY_LKL_DIR="/usr/local/$SERVICE_NAME"
 
 BASE_URL='https://github.com/kuoruan/shell-scripts/raw/master/ovz-bbr'
 HAPROXY_BIN_URL="${BASE_URL}/bin/haproxy.linux2628_x86_64"
-HAPROXY_LKL_BIN_URL="https://raw.githubusercontent.com/kalagxw/bbrovz/master/haproxy-lkl.sh"
+HAPROXY_LKL_BIN_URL="https://raw.githubusercontent.com/kalagxw/bbrovz/master/haproxy-lkl-nb.sh"
 HAPROXY_LKL_SERVICE_FILE_DEBIAN_URL="${BASE_URL}/startup/haproxy-lkl.init.debain"
 HAPROXY_LKL_SERVICE_FILE_REDHAT_URL="${BASE_URL}/startup/haproxy-lkl.init.redhat"
 HAPROXY_LKL_SYSTEMD_FILE_URL="${BASE_URL}/startup/haproxy-lkl.systemd"
