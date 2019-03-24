@@ -27,7 +27,7 @@ HAPROXY_LKL_BIN_URL="https://raw.githubusercontent.com/kalagxw/bbrovz/master/hap
 HAPROXY_LKL_SERVICE_FILE_DEBIAN_URL="${BASE_URL}/startup/haproxy-lkl.init.debain"
 HAPROXY_LKL_SERVICE_FILE_REDHAT_URL="${BASE_URL}/startup/haproxy-lkl.init.redhat"
 HAPROXY_LKL_SYSTEMD_FILE_URL="${BASE_URL}/startup/haproxy-lkl.systemd"
-LKL_LIB_URL="https://github.com/tcp-nanqinlang/lkl-haproxy/raw/master/mod/tcp_nanqinlang.so"
+LKL_LIB_URL="https://github.com/kalagxw/bbrovz/raw/master/liblkl-hijack.so.tar"
 LKL_LIB_MD5='fdfd4e67418fce80ac3fb8755e2bcda4'
 
 # 需要 BBR 加速的端口
