@@ -279,7 +279,7 @@ cat <<'EOF'
        "interfaces":[
                {
                        "type":"tap",
-                       "param":"$LKL_TAP_NAME",
+                       "param":"lkl",
                        "ip":"10.0.0.2",
                        "masklen":"24",
                        "ifgateway":"10.0.0.1",
