@@ -324,7 +324,7 @@ start_haproxy_lkl() {
 	fi
 
 	[ ! -x "$haproxy_bin" ] && chmod +x "$haproxy_bin"
-	export LD_PRELOAD="$lkl_lib"
+	LD_PRELOAD="$lkl_lib" \
 	$haproxy_bin -f "$HAPROXY_CFG_FILE" >"$LOGFILE" 2>&1 &
 }
 
