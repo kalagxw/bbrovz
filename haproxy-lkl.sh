@@ -268,7 +268,7 @@ touch "$LKL_CFG_FILE" 2>/dev/null
 		exit 1
 	fi
 	(
-cat <<'EOF'
+	cat <<'EOF'
 	{
        "gateway":"10.0.0.1",
        "debug":"1",
@@ -288,7 +288,7 @@ cat <<'EOF'
                }
                     ]
      }
-EOF
+     EOF
 
 ) > "$LKL_CFG_FILE"
 
@@ -325,7 +325,7 @@ start_haproxy_lkl() {
 
 	[ ! -x "$haproxy_bin" ] && chmod +x "$haproxy_bin"
 	LD_PRELOAD="$lkl_lib" \
-	$haproxy_bin -f "$HAPROXY_CFG_FILE" >"$LOGFILE" 2>&1 &
+	$haproxy_bin -f "$HAPROXY_CFG_FILE" > "$LOGFILE" 2>&1 &
 }
 
 do_start() {
