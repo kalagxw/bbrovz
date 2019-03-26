@@ -296,7 +296,7 @@ start_haproxy_lkl() {
 	LKL_HIJACK_NET_NETMASK_LEN=24 \
 	LKL_HIJACK_NET_GATEWAY=10.0.0.1 \
 	LKL_HIJACK_OFFLOAD=0x8883 \
-	$haproxy_bin -f "$HAPROXY_CFG_FILE" >"$LOGFILE" 2>&1 &
+	$haproxy_bin -f "$HAPROXY_CFG_FILE" > "$LOGFILE" 2>&1 &
 }
 
 do_start() {
